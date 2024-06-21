@@ -5,10 +5,12 @@
  */
 package frontdesk;
 
+import config.PanelPrinter;
 import doctor.*;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -61,7 +63,7 @@ public class printAppointmentForm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        page = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -69,11 +71,13 @@ public class printAppointmentForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        atime = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        pname = new javax.swing.JLabel();
+        aid = new javax.swing.JLabel();
+        adate = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        astatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,111 +261,169 @@ public class printAppointmentForm extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jButton1.setText("PRINT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jPanel4.setLayout(null);
+        page.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("_______________________________________________________");
-        jPanel4.add(jLabel15);
-        jLabel15.setBounds(0, 70, 500, 19);
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("Patient's Name:");
-        jPanel4.add(jLabel17);
-        jLabel17.setBounds(40, 180, 148, 19);
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("Date:");
-        jPanel4.add(jLabel21);
-        jLabel21.setBounds(40, 240, 148, 19);
 
         jLabel22.setBackground(new java.awt.Color(0, 0, 0));
         jLabel22.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel22.setText("Time:");
-        jPanel4.add(jLabel22);
-        jLabel22.setBounds(40, 300, 148, 19);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-medical-insurance-64.png"))); // NOI18N
-        jPanel4.add(jLabel11);
-        jLabel11.setBounds(40, 10, 64, 64);
 
         jLabel8.setFont(new java.awt.Font("Georgia", 3, 30)); // NOI18N
         jLabel8.setText("DocMinder Hospital");
-        jPanel4.add(jLabel8);
-        jLabel8.setBounds(110, 20, 330, 35);
 
         jLabel23.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel23.setText("Poblacion ward II, Minglanilla, Cebu.");
-        jPanel4.add(jLabel23);
-        jLabel23.setBounds(170, 50, 210, 30);
 
-        jLabel24.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel24.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel24.setText("10:00:00");
-        jPanel4.add(jLabel24);
-        jLabel24.setBounds(170, 300, 148, 19);
+        atime.setBackground(new java.awt.Color(0, 0, 0));
+        atime.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        atime.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        atime.setText("atime");
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 0));
         jLabel25.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setText("Appointment ID:");
-        jPanel4.add(jLabel25);
-        jLabel25.setBounds(40, 120, 148, 19);
 
-        jLabel26.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel26.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel26.setText("Frank Fuentes");
-        jPanel4.add(jLabel26);
-        jLabel26.setBounds(170, 180, 148, 19);
+        pname.setBackground(new java.awt.Color(0, 0, 0));
+        pname.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        pname.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pname.setText("pname");
 
-        jLabel27.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel27.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel27.setText("101");
-        jPanel4.add(jLabel27);
-        jLabel27.setBounds(170, 120, 148, 19);
+        aid.setBackground(new java.awt.Color(0, 0, 0));
+        aid.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        aid.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aid.setText("aid");
 
-        jLabel28.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel28.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel28.setText("2024-05-07");
-        jPanel4.add(jLabel28);
-        jLabel28.setBounds(170, 240, 148, 19);
+        adate.setBackground(new java.awt.Color(0, 0, 0));
+        adate.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        adate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        adate.setText("adate");
+
+        jLabel24.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel24.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel24.setText("Status:");
+
+        astatus.setBackground(new java.awt.Color(0, 0, 0));
+        astatus.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        astatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        astatus.setText("astatus");
+
+        javax.swing.GroupLayout pageLayout = new javax.swing.GroupLayout(page);
+        page.setLayout(pageLayout);
+        pageLayout.setHorizontalGroup(
+            pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(6, 6, 6)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(astatus, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(aid, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pname, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(adate, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(atime, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
+        pageLayout.setVerticalGroup(
+            pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel15)))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aid)
+                    .addComponent(jLabel25))
+                .addGap(41, 41, 41)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pname)
+                    .addComponent(jLabel17))
+                .addGap(41, 41, 41)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adate)
+                    .addComponent(jLabel21))
+                .addGap(41, 41, 41)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(atime))
+                .addGap(41, 41, 41)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addComponent(astatus))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(465, 465, 465)
-                .addComponent(jButton1)
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
+                .addGap(6, 6, 6))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
@@ -462,6 +524,14 @@ public class printAppointmentForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_updateaPanelMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        JPanel myPanel = new JPanel();
+        PanelPrinter pPrint = new PanelPrinter(page);
+        pPrint.printPanel();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,8 +599,12 @@ public class printAppointmentForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel adate;
     private javax.swing.JPanel addaPanel;
     private javax.swing.JPanel addpPanel;
+    public javax.swing.JLabel aid;
+    public javax.swing.JLabel astatus;
+    public javax.swing.JLabel atime;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -550,9 +624,6 @@ public class printAppointmentForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -563,8 +634,9 @@ public class printAppointmentForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel logoutPanel;
+    private javax.swing.JPanel page;
+    public javax.swing.JLabel pname;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;
     private javax.swing.JPanel updateaPanel;

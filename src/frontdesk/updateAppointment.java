@@ -11,6 +11,10 @@ import prescriptionapp.*;
 
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -23,9 +27,23 @@ public class updateAppointment extends javax.swing.JFrame {
      */
     public updateAppointment() {
         initComponents();
+        displayData();
     }
     
-     
+    public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT tbl_appointment.a_id, tbl_appointment.a_date, tbl_appointment.a_time, tbl_appointment.a_status, tbl_patient.p_id, tbl_patient.p_name FROM tbl_appointment JOIN tbl_patient ON tbl_patient.p_id = tbl_appointment.p_id");
+            uatable.setModel(DbUtils.resultSetToTableModel(rs));
+             rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
+        
+    
+    }
+    
 
     Color navcolor = new Color(0,102,102);
     Color bodycolor = new Color(0,51,51);
@@ -68,10 +86,9 @@ public class updateAppointment extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        uaTable = new javax.swing.JTable();
+        uatable = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,7 +275,7 @@ public class updateAppointment extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        uaTable.setModel(new javax.swing.table.DefaultTableModel(
+        uatable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -266,7 +283,7 @@ public class updateAppointment extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(uaTable);
+        jScrollPane1.setViewportView(uatable);
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -279,8 +296,11 @@ public class updateAppointment extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-
-        jButton2.setText("CANCEL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -288,16 +308,13 @@ public class updateAppointment extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))))
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,11 +323,9 @@ public class updateAppointment extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
@@ -411,10 +426,32 @@ public class updateAppointment extends javax.swing.JFrame {
     }//GEN-LAST:event_printdpPanelMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        canresAppointment cra = new canresAppointment();
-        cra.setVisible(true);
-        this.dispose();
+       
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+         int rowIndex = uatable.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select an appointment!");
+        }else{ 
+            TableModel model = uatable.getModel();
+          
+            canresAppointment cra = new canresAppointment();
+            cra.aid.setText(""+model.getValueAt(rowIndex, 0));
+            cra.pname.setText(""+model.getValueAt(rowIndex, 4));
+
+            
+            cra.setVisible(true);
+            this.dispose();
+            
+            
+          
+                    
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,7 +507,6 @@ public class updateAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel addaPanel;
     private javax.swing.JPanel addpPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -495,7 +531,7 @@ public class updateAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;
-    private javax.swing.JTable uaTable;
+    private javax.swing.JTable uatable;
     private javax.swing.JPanel updateaPanel;
     // End of variables declaration//GEN-END:variables
 }

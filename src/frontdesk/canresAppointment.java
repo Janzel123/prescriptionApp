@@ -5,12 +5,14 @@
  */
 package frontdesk;
 
+import config.dbConnector;
 import doctor.*;
 import prescriptionapp.*;
 
 
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -68,11 +70,17 @@ public class canresAppointment extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         backPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        pname = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        date = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        aid = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        time = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        stat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -265,7 +273,7 @@ public class canresAppointment extends javax.swing.JFrame {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Please enter new schedule.");
         jPanel3.add(jLabel15);
-        jLabel15.setBounds(0, 120, 560, 19);
+        jLabel15.setBounds(0, 20, 560, 19);
 
         backPanel.setBackground(new java.awt.Color(255, 255, 255));
         backPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -288,35 +296,77 @@ public class canresAppointment extends javax.swing.JFrame {
         jPanel3.add(backPanel);
         backPanel.setBounds(520, 10, 40, 40);
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        pname.setEnabled(false);
+        pname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                pnameActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField3);
-        jTextField3.setBounds(110, 200, 350, 41);
+        jPanel3.add(pname);
+        pname.setBounds(110, 170, 350, 41);
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel21.setText("Date (YYYY-MM-DD):");
+        jLabel21.setText("Patient Name:");
         jPanel3.add(jLabel21);
-        jLabel21.setBounds(110, 170, 180, 22);
+        jLabel21.setBounds(110, 140, 180, 22);
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel22.setText("Time:");
+        jLabel22.setText("Date:");
         jPanel3.add(jLabel22);
-        jLabel22.setBounds(110, 260, 45, 22);
+        jLabel22.setBounds(110, 220, 43, 22);
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                dateActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField6);
-        jTextField6.setBounds(110, 290, 350, 41);
+        jPanel3.add(date);
+        date.setBounds(110, 250, 350, 41);
 
-        jButton2.setText("ENTER");
+        jButton2.setText("UPDATE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton2);
-        jButton2.setBounds(390, 350, 70, 30);
+        jButton2.setBounds(380, 460, 80, 30);
+
+        jLabel23.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel23.setText("Status:");
+        jPanel3.add(jLabel23);
+        jLabel23.setBounds(110, 380, 180, 22);
+
+        aid.setEnabled(false);
+        aid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aidActionPerformed(evt);
+            }
+        });
+        jPanel3.add(aid);
+        aid.setBounds(110, 90, 350, 41);
+
+        jLabel24.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel24.setText("Appointment ID:");
+        jPanel3.add(jLabel24);
+        jLabel24.setBounds(110, 60, 180, 22);
+
+        time.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(time);
+        time.setBounds(110, 330, 350, 41);
+
+        jLabel25.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel25.setText("Time:");
+        jPanel3.add(jLabel25);
+        jLabel25.setBounds(110, 300, 180, 22);
+
+        stat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Canceled" }));
+        jPanel3.add(stat);
+        stat.setBounds(110, 410, 350, 40);
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
 
@@ -433,13 +483,35 @@ public class canresAppointment extends javax.swing.JFrame {
         
     }//GEN-LAST:event_backPanelMouseClicked
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void pnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_pnameActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_dateActionPerformed
+
+    private void aidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aidActionPerformed
+
+    private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timeActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        if(aid.getText().isEmpty() || pname.getText().isEmpty() || date.getText().isEmpty() || time.getText().isEmpty()){
+          JOptionPane.showMessageDialog(null, "All fields are required!");
+      }else{
+        dbConnector dbc = new dbConnector();
+        dbc.updateData("UPDATE tbl_appointment SET a_date = '"+date.getText()+"', a_time = '"+time.getText()+"', a_status = '"+stat.getSelectedItem()+"' WHERE a_id = '"+aid.getText()+"'");
+        
+        updateAppointment ua = new updateAppointment();
+        ua.setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,7 +582,9 @@ public class canresAppointment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addaPanel;
     private javax.swing.JPanel addpPanel;
+    public javax.swing.JTextField aid;
     private javax.swing.JPanel backPanel;
+    public javax.swing.JTextField date;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -525,6 +599,9 @@ public class canresAppointment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -535,11 +612,12 @@ public class canresAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel logoutPanel;
+    public javax.swing.JTextField pname;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;
+    public javax.swing.JComboBox<String> stat;
+    public javax.swing.JTextField time;
     private javax.swing.JPanel updateaPanel;
     // End of variables declaration//GEN-END:variables
 }

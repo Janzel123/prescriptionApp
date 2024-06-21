@@ -5,6 +5,7 @@
  */
 package prescriptionapp;
 
+import config.Session;
 import config.dbConnector;
 import doctor.doctorDashboard;
 import frontdesk.frontdeskDashboard;
@@ -36,6 +37,14 @@ public class loginForm extends javax.swing.JFrame {
             if(resultSet.next()){
                 
                 type = resultSet.getString("u_type");
+                Session sess = Session.getInstance();  
+                sess.setUid(resultSet.getInt("u_id"));
+                sess.setUname(resultSet.getString("u_name"));
+                sess.setUemail(resultSet.getString("u_email"));
+                sess.setUusername(resultSet.getString("u_username"));
+                sess.setUtype(resultSet.getString("u_type"));
+                
+                
                 return true;
                 
             }else{

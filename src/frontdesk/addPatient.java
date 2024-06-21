@@ -71,8 +71,8 @@ public class addPatient extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         page = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        pgender = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        pgender = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -298,14 +298,6 @@ public class addPatient extends javax.swing.JFrame {
         jPanel3.add(jLabel23);
         jLabel23.setBounds(30, 300, 70, 22);
 
-        pgender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pgenderActionPerformed(evt);
-            }
-        });
-        jPanel3.add(pgender);
-        pgender.setBounds(110, 290, 410, 41);
-
         jButton1.setText("ENTER");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +306,10 @@ public class addPatient extends javax.swing.JFrame {
         });
         jPanel3.add(jButton1);
         jButton1.setBounds(440, 350, 70, 30);
+
+        pgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        jPanel3.add(pgender);
+        pgender.setBounds(110, 290, 410, 40);
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
 
@@ -420,16 +416,12 @@ public class addPatient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pageActionPerformed
 
-    private void pgenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pgenderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pgenderActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         dbConnector dbc = new dbConnector();
     
     if(dbc.insertData("INSERT INTO tbl_patient(p_name, p_age, p_gender) "
-            + "VALUES ('"+pname.getText()+"','"+page.getText()+"','"+pgender.getText()+"')"))
+            + "VALUES ('"+pname.getText()+"','"+page.getText()+"','"+pgender.getSelectedItem()+"')"))
     {
         
     JOptionPane.showMessageDialog(null, "Inserted Successfully!");
@@ -516,7 +508,7 @@ public class addPatient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JTextField page;
-    private javax.swing.JTextField pgender;
+    private javax.swing.JComboBox<String> pgender;
     private javax.swing.JTextField pname;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;

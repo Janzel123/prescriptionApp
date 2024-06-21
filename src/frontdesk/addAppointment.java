@@ -296,6 +296,11 @@ public class addAppointment extends javax.swing.JFrame {
 
             }
         ));
+        aaTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aaTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(aaTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -309,8 +314,8 @@ public class addAppointment extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,28 +439,27 @@ public class addAppointment extends javax.swing.JFrame {
         int rowIndex = aaTable.getSelectedRow();
         
         if(rowIndex < 0){
-            JOptionPane.showMessageDialog(null, "Please select an item!");
-        }else{
+            JOptionPane.showMessageDialog(null, "Please select a patient!");
+        }else{ 
+            TableModel model = aaTable.getModel();
+          
             scheduleAppointment sa = new scheduleAppointment();
+            sa.pid.setText(""+model.getValueAt(rowIndex, 0));      
+            sa.setVisible(true);
+            this.dispose();
             
-            try{
-                
-            dbConnector dbc = new dbConnector();
-            TableModel tbl = aaTable.getModel();
-            ResultSet rs = dbc.getData("SELECT * FROM tbl_appointment JOIN tbl_patient ON tbl_patient.p_id = tbl_appointment.p_id");
-            if(rs.next()){
-                
-            }
-                    
-            }catch(SQLException ex){
-                System.out.println(""+ex);
-            }        
+            
+          
                     
         }
         
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void aaTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aaTableMouseClicked
+
+    }//GEN-LAST:event_aaTableMouseClicked
 
     /**
      * @param args the command line arguments

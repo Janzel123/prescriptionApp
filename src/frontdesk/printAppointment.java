@@ -5,10 +5,16 @@
  */
 package frontdesk;
 
+import config.dbConnector;
 import doctor.*;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -21,6 +27,21 @@ public class printAppointment extends javax.swing.JFrame {
      */
     public printAppointment() {
         initComponents();
+        displayData();
+    }
+    
+    public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT tbl_appointment.a_id, tbl_appointment.a_date, tbl_appointment.a_time, tbl_appointment.a_status, tbl_patient.p_id, tbl_patient.p_name FROM tbl_appointment JOIN tbl_patient ON tbl_patient.p_id = tbl_appointment.p_id");
+            patable.setModel(DbUtils.resultSetToTableModel(rs));
+             rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
+        
+    
     }
 
     Color navcolor = new Color(0,102,102);
@@ -60,10 +81,10 @@ public class printAppointment extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        patable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -250,8 +271,6 @@ public class printAppointment extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jScrollPane1.setViewportView(jTable1);
-
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -264,6 +283,21 @@ public class printAppointment extends javax.swing.JFrame {
             }
         });
 
+        patable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        patable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(patable);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -271,23 +305,23 @@ public class printAppointment extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
@@ -389,10 +423,33 @@ public class printAppointment extends javax.swing.JFrame {
     }//GEN-LAST:event_updateaPanelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        printAppointmentForm paf = new printAppointmentForm();
-        paf.setVisible(true);
-        this.dispose();
+
+        int rowIndex = patable.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select an appointment!");
+        }else{ 
+            TableModel model = patable.getModel();
+          
+            printAppointmentForm paf = new printAppointmentForm();
+            paf.aid.setText(""+model.getValueAt(rowIndex, 0));
+            paf.pname.setText(""+model.getValueAt(rowIndex, 5));
+            paf.adate.setText(""+model.getValueAt(rowIndex, 1));
+            paf.atime.setText(""+model.getValueAt(rowIndex, 2));
+            paf.astatus.setText(""+model.getValueAt(rowIndex, 3));
+            paf.setVisible(true);
+            this.dispose();
+            
+            
+          
+                    
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void patableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patableMouseClicked
+
+    }//GEN-LAST:event_patableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -469,8 +526,8 @@ public class printAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel logoutPanel;
+    private javax.swing.JTable patable;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;
     private javax.swing.JPanel updateaPanel;

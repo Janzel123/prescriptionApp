@@ -460,7 +460,10 @@ public class addUser extends javax.swing.JFrame {
 
     dbConnector dbc = new dbConnector();
     
-    if(dbc.insertData("INSERT INTO tbl_user(u_name, u_email, u_username, u_password, u_type) "
+    if(name.getText().isEmpty() || em.getText().isEmpty() || un.getText().isEmpty() || pw.getText().isEmpty()){
+          JOptionPane.showMessageDialog(null, "All fields are required!");
+      }else {
+        if(dbc.insertData("INSERT INTO tbl_user(u_name, u_email, u_username, u_password, u_type) "
             + "VALUES ('"+name.getText()+"','"+em.getText()+"','"+un.getText()+"','"+pw.getText()+"','"+ut.getSelectedItem()+"')"))
     {
         
@@ -469,12 +472,8 @@ public class addUser extends javax.swing.JFrame {
     lf.setVisible(true);
     this.dispose();
     
-    }else{
-        
-        JOptionPane.showMessageDialog(null, "Connection Error!");
-    
     }
-    
+    }
    
         
     }//GEN-LAST:event_jButton1ActionPerformed

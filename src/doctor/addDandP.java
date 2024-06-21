@@ -5,9 +5,13 @@
  */
 package doctor;
 
+import config.Session;
+import config.dbConnector;
+import frontdesk.frontdeskDashboard;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Frank
@@ -64,21 +68,35 @@ public class addDandP extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        diagnosis = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        medicine = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        dosage = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        frequency = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         backPanel = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
+        aid = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        pname = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        dname = new javax.swing.JTextField();
+        pid = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        did = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -269,73 +287,71 @@ public class addDandP extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
         jPanel3.setLayout(null);
 
-        jLabel15.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Please enter diagnosis and prescription details.");
-        jPanel3.add(jLabel15);
-        jLabel15.setBounds(0, 100, 560, 19);
-
-        jLabel22.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel22.setText("Enter Diagnosis:");
         jPanel3.add(jLabel22);
-        jLabel22.setBounds(30, 140, 132, 22);
+        jLabel22.setBounds(30, 260, 116, 19);
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        diagnosis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                diagnosisActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField6);
-        jTextField6.setBounds(180, 140, 350, 41);
+        jPanel3.add(diagnosis);
+        diagnosis.setBounds(180, 260, 350, 40);
 
-        jLabel23.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel23.setText("Enter Medicine:");
         jPanel3.add(jLabel23);
-        jLabel23.setBounds(30, 200, 132, 22);
+        jLabel23.setBounds(30, 310, 132, 19);
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        medicine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                medicineActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField7);
-        jTextField7.setBounds(180, 200, 350, 41);
+        jPanel3.add(medicine);
+        medicine.setBounds(180, 310, 350, 40);
 
-        jLabel24.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel24.setText("Dosage (mg):");
         jPanel3.add(jLabel24);
-        jLabel24.setBounds(30, 260, 115, 22);
+        jLabel24.setBounds(30, 370, 115, 19);
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        dosage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                dosageActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField8);
-        jTextField8.setBounds(180, 250, 350, 41);
+        jPanel3.add(dosage);
+        dosage.setBounds(180, 360, 350, 40);
 
-        jLabel25.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel25.setText("Frequency:");
         jPanel3.add(jLabel25);
-        jLabel25.setBounds(30, 310, 90, 22);
+        jLabel25.setBounds(30, 420, 77, 19);
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        frequency.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                frequencyActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField9);
-        jTextField9.setBounds(180, 310, 350, 41);
+        jPanel3.add(frequency);
+        frequency.setBounds(180, 411, 350, 40);
 
         jButton1.setText("ENTER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton1);
-        jButton1.setBounds(460, 370, 70, 30);
+        jButton1.setBounds(460, 460, 70, 30);
 
-        jLabel26.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel26.setText("(times per day)");
         jPanel3.add(jLabel26);
-        jLabel26.setBounds(30, 340, 119, 22);
+        jLabel26.setBounds(30, 450, 104, 19);
 
         backPanel.setBackground(new java.awt.Color(255, 255, 255));
         backPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -353,10 +369,80 @@ public class addDandP extends javax.swing.JFrame {
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-30.png"))); // NOI18N
-        backPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+        backPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 40));
 
         jPanel3.add(backPanel);
-        backPanel.setBounds(520, 10, 40, 40);
+        backPanel.setBounds(530, 0, 30, 40);
+
+        aid.setEnabled(false);
+        aid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aidActionPerformed(evt);
+            }
+        });
+        jPanel3.add(aid);
+        aid.setBounds(180, 10, 350, 40);
+
+        jLabel27.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel27.setText("Appointment ID:");
+        jPanel3.add(jLabel27);
+        jLabel27.setBounds(30, 10, 111, 19);
+
+        jLabel30.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel30.setText("Patient's Name:");
+        jPanel3.add(jLabel30);
+        jLabel30.setBounds(30, 210, 140, 19);
+
+        pname.setEnabled(false);
+        pname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pnameActionPerformed(evt);
+            }
+        });
+        jPanel3.add(pname);
+        pname.setBounds(180, 210, 350, 40);
+
+        jLabel31.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel31.setText("Doctor's Name:");
+        jPanel3.add(jLabel31);
+        jLabel31.setBounds(30, 110, 140, 19);
+
+        dname.setEnabled(false);
+        dname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dnameActionPerformed(evt);
+            }
+        });
+        jPanel3.add(dname);
+        dname.setBounds(180, 111, 350, 40);
+
+        pid.setEnabled(false);
+        pid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pidActionPerformed(evt);
+            }
+        });
+        jPanel3.add(pid);
+        pid.setBounds(180, 160, 350, 40);
+
+        jLabel32.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel32.setText("Patient's ID:");
+        jPanel3.add(jLabel32);
+        jLabel32.setBounds(30, 160, 140, 19);
+
+        jLabel29.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel29.setText("Doctor's ID:");
+        jPanel3.add(jLabel29);
+        jLabel29.setBounds(30, 60, 81, 19);
+
+        did.setEnabled(false);
+        did.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                didActionPerformed(evt);
+            }
+        });
+        jPanel3.add(did);
+        did.setBounds(180, 60, 350, 40);
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
 
@@ -455,21 +541,21 @@ public class addDandP extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_adduserPanelMouseClicked
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void diagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagnosisActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_diagnosisActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void medicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicineActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_medicineActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void dosageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosageActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_dosageActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void frequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frequencyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_frequencyActionPerformed
 
     private void backPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backPanelMouseClicked
 
@@ -488,6 +574,66 @@ public class addDandP extends javax.swing.JFrame {
     private void backPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backPanelMouseExited
         backPanel.setBackground(outcolor);
     }//GEN-LAST:event_backPanelMouseExited
+
+    private void aidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aidActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        Session sess = Session.getInstance();
+        
+        
+          if(diagnosis.getText().isEmpty() || medicine.getText().isEmpty() || dosage.getText().isEmpty() || frequency.getText().isEmpty()){
+          JOptionPane.showMessageDialog(null, "All fields are required!");
+      }else{
+          dbConnector dbc = new dbConnector();
+    
+            if(dbc.insertData("INSERT INTO tbl_prescription(u_id, a_id, p_id, pr_diagnosis, pr_medicine, pr_dosage, pr_frequency) "
+            + "VALUES ('"+sess.getUid()+"','"+aid.getText()+"','"+pid.getText()+"','"+diagnosis.getText()+"','"+medicine.getText()+"','"+dosage.getText()+"','"+frequency.getText()+"')"))
+            {
+                JOptionPane.showMessageDialog(null, "Prescription Added!");
+                
+                doctorDashboard ddb = new doctorDashboard();
+                ddb.setVisible(true);
+                this.dispose();
+    
+            }
+      }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        
+         Session sess = Session.getInstance();
+        if(sess.getUid() == 0){
+            JOptionPane.showMessageDialog(null, "No Account, Login First!");
+            loginForm lf = new loginForm();
+            lf.setVisible(true);
+            this.dispose();
+        }
+        
+        did.setText(""+sess.getUid());
+        dname.setText(""+sess.getUname());
+       
+        
+    }//GEN-LAST:event_formWindowActivated
+
+    private void pnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnameActionPerformed
+
+    private void dnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dnameActionPerformed
+
+    private void pidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pidActionPerformed
+
+    private void didActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_didActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_didActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,7 +676,13 @@ public class addDandP extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adddpPanel;
     private javax.swing.JPanel adduserPanel;
+    public javax.swing.JTextField aid;
     private javax.swing.JPanel backPanel;
+    private javax.swing.JTextField diagnosis;
+    public javax.swing.JTextField did;
+    public javax.swing.JTextField dname;
+    private javax.swing.JTextField dosage;
+    private javax.swing.JTextField frequency;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -538,7 +690,6 @@ public class addDandP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -550,8 +701,13 @@ public class addDandP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -561,11 +717,10 @@ public class addDandP extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel logOutPanel;
+    private javax.swing.JTextField medicine;
+    public javax.swing.JTextField pid;
+    public javax.swing.JTextField pname;
     private javax.swing.JPanel printdapPanel;
     private javax.swing.JPanel updatefaPanel;
     private javax.swing.JPanel viewaPanel;

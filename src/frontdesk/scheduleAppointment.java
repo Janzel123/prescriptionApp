@@ -67,12 +67,14 @@ public class scheduleAppointment extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        adate = new javax.swing.JTextField();
+        pid = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         atime = new javax.swing.JTextField();
         backPanel = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
+        adate = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,11 +260,13 @@ public class scheduleAppointment extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Please enter appointment details.");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 560, -1));
 
         jButton1.setText("ENTER");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -270,24 +274,30 @@ public class scheduleAppointment extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 70, 30));
 
-        adate.addActionListener(new java.awt.event.ActionListener() {
+        pid.setEnabled(false);
+        pid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adateActionPerformed(evt);
+                pidActionPerformed(evt);
             }
         });
+        jPanel3.add(pid, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 357, 41));
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel21.setText("Date (YYYY-MM-DD):");
+        jLabel21.setText("Patient ID:");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel22.setText("Time (HH-MM-SS):");
+        jLabel22.setText("Time:");
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 247, -1));
 
         atime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 atimeActionPerformed(evt);
             }
         });
+        jPanel3.add(atime, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 357, 41));
 
         backPanel.setBackground(new java.awt.Color(255, 255, 255));
         backPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -307,45 +317,18 @@ public class scheduleAppointment extends javax.swing.JFrame {
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-30.png"))); // NOI18N
         backPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel21)
-                        .addComponent(atime)
-                        .addComponent(adate, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(91, 91, 91))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(jLabel15)
-                .addGap(40, 40, 40)
-                .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(atime, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
+        jPanel3.add(backPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 11, -1, -1));
+
+        adate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adateActionPerformed(evt);
+            }
+        });
+        jPanel3.add(adate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 357, 41));
+
+        jLabel23.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel23.setText("Date:");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
 
@@ -444,9 +427,9 @@ public class scheduleAppointment extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_updateaPanelMouseClicked
 
-    private void adateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adateActionPerformed
+    private void pidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_adateActionPerformed
+    }//GEN-LAST:event_pidActionPerformed
 
     private void atimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atimeActionPerformed
         // TODO add your handling code here:
@@ -470,9 +453,28 @@ public class scheduleAppointment extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-      
+      if(pid.getText().isEmpty() || adate.getText().isEmpty() || atime.getText().isEmpty()){
+          JOptionPane.showMessageDialog(null, "All fields are required!");
+      }else{
+          dbConnector dbc = new dbConnector();
+    
+            if(dbc.insertData("INSERT INTO tbl_appointment(p_id, a_date, a_time) "
+            + "VALUES ('"+pid.getText()+"','"+adate.getText()+"','"+atime.getText()+"')"))
+            {
+                JOptionPane.showMessageDialog(null, "Appointment Added!");
+                
+                frontdeskDashboard fddb = new frontdeskDashboard();
+                fddb.setVisible(true);
+                this.dispose();
+    
+            }
+      }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void adateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -560,6 +562,7 @@ public class scheduleAppointment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -571,6 +574,7 @@ public class scheduleAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel logoutPanel;
+    public javax.swing.JTextField pid;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;
     private javax.swing.JPanel updateaPanel;

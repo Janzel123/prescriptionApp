@@ -5,9 +5,16 @@
  */
 package doctor;
 
+import config.dbConnector;
+import frontdesk.scheduleAppointment;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Frank
@@ -19,6 +26,21 @@ public class addDandPAT extends javax.swing.JFrame {
      */
     public addDandPAT() {
         initComponents();
+        displayData();
+    }
+    
+      public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT tbl_appointment.a_id, tbl_appointment.a_date, tbl_appointment.a_time, tbl_patient.p_id, tbl_patient.p_name FROM tbl_appointment JOIN tbl_patient ON tbl_patient.p_id = tbl_appointment.p_id WHERE a_status = 'Pending'");
+            apTable.setModel(DbUtils.resultSetToTableModel(rs));
+             rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
+        
+    
     }
 
     Color navcolor = new Color(0,102,102);
@@ -64,7 +86,7 @@ public class addDandPAT extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        apTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -270,13 +292,31 @@ public class addDandPAT extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton1);
-        jButton1.setBounds(455, 407, 70, 30);
+        jButton1.setBounds(470, 420, 70, 30);
 
-        jScrollPane1.setViewportView(jTable1);
+        apTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        apTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                apTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(apTable);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 110, 500, 290);
+        jScrollPane1.setBounds(20, 110, 520, 300);
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 560, -1));
 
@@ -381,6 +421,34 @@ public class addDandPAT extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void apTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apTableMouseClicked
+
+    }//GEN-LAST:event_apTableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        int rowIndex = apTable.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select an appointment!");
+        }else{ 
+            TableModel model = apTable.getModel();
+          
+            addDandP addp = new addDandP();
+            addp.aid.setText(""+model.getValueAt(rowIndex, 0));  
+            addp.pid.setText(""+model.getValueAt(rowIndex, 3));  
+            addp.pname.setText(""+model.getValueAt(rowIndex, 4));
+            addp.setVisible(true);
+            this.dispose();
+            
+            
+          
+                    
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -426,6 +494,7 @@ public class addDandPAT extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adddpPanel;
     private javax.swing.JPanel adduserPanel;
+    private javax.swing.JTable apTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -451,7 +520,6 @@ public class addDandPAT extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel logOutPanel;
     private javax.swing.JPanel printdapPanel;
     private javax.swing.JPanel updatefaPanel;

@@ -5,9 +5,11 @@
  */
 package doctor;
 
+import config.PanelPrinter;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import javax.swing.JPanel;
 /**
  *
  * @author Frank
@@ -61,7 +63,7 @@ public class printDandPForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        page = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -69,20 +71,16 @@ public class printDandPForm extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        freq = new javax.swing.JLabel();
+        pname = new javax.swing.JLabel();
+        diag = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        med = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        dos = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
+        dname = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -272,171 +270,204 @@ public class printDandPForm extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jPanel4.setLayout(null);
+        page.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("_______________________________________________________");
-        jPanel4.add(jLabel15);
-        jLabel15.setBounds(0, 70, 500, 19);
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("Patient's Name:");
-        jPanel4.add(jLabel21);
-        jLabel21.setBounds(20, 270, 120, 19);
 
         jLabel22.setBackground(new java.awt.Color(0, 0, 0));
         jLabel22.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel22.setText("Diagnosis:");
-        jPanel4.add(jLabel22);
-        jLabel22.setBounds(280, 120, 90, 19);
 
         jLabel23.setBackground(new java.awt.Color(0, 0, 0));
         jLabel23.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel23.setText("(times per day)");
-        jPanel4.add(jLabel23);
-        jLabel23.setBounds(280, 290, 120, 19);
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-medical-insurance-64.png"))); // NOI18N
-        jPanel4.add(jLabel24);
-        jLabel24.setBounds(40, 10, 64, 64);
 
         jLabel25.setFont(new java.awt.Font("Georgia", 3, 30)); // NOI18N
         jLabel25.setText("DocMinder Hospital");
-        jPanel4.add(jLabel25);
-        jLabel25.setBounds(110, 20, 330, 35);
 
         jLabel26.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel26.setText("Poblacion ward II, Minglanilla, Cebu.");
-        jPanel4.add(jLabel26);
-        jLabel26.setBounds(170, 50, 210, 30);
 
-        jLabel27.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel27.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel27.setText("3");
-        jPanel4.add(jLabel27);
-        jLabel27.setBounds(410, 270, 100, 19);
+        freq.setBackground(new java.awt.Color(0, 0, 0));
+        freq.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        freq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        freq.setText("freq");
 
-        jLabel28.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel28.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel28.setText("Prescription ID:");
-        jPanel4.add(jLabel28);
-        jLabel28.setBounds(20, 120, 120, 19);
+        pname.setBackground(new java.awt.Color(0, 0, 0));
+        pname.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        pname.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pname.setText("pname");
 
-        jLabel29.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel29.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setText("Frank Fuentes");
-        jPanel4.add(jLabel29);
-        jLabel29.setBounds(150, 270, 148, 19);
-
-        jLabel30.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel30.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setText("101");
-        jPanel4.add(jLabel30);
-        jLabel30.setBounds(150, 120, 148, 19);
-
-        jLabel31.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel31.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel31.setText("Fever");
-        jPanel4.add(jLabel31);
-        jLabel31.setBounds(410, 120, 100, 19);
+        diag.setBackground(new java.awt.Color(0, 0, 0));
+        diag.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        diag.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        diag.setText("diag");
 
         jLabel32.setBackground(new java.awt.Color(0, 0, 0));
         jLabel32.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel32.setText("Medicine:");
-        jPanel4.add(jLabel32);
-        jLabel32.setBounds(280, 170, 80, 19);
 
-        jLabel33.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel33.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel33.setText("Biogesic");
-        jPanel4.add(jLabel33);
-        jLabel33.setBounds(410, 170, 100, 19);
+        med.setBackground(new java.awt.Color(0, 0, 0));
+        med.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        med.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        med.setText("med");
 
         jLabel34.setBackground(new java.awt.Color(0, 0, 0));
         jLabel34.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel34.setText("Dosage (mg):");
-        jPanel4.add(jLabel34);
-        jLabel34.setBounds(280, 220, 100, 19);
 
-        jLabel35.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel35.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel35.setText("100");
-        jPanel4.add(jLabel35);
-        jLabel35.setBounds(410, 220, 100, 19);
+        dos.setBackground(new java.awt.Color(0, 0, 0));
+        dos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        dos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dos.setText("dos");
 
         jLabel36.setBackground(new java.awt.Color(0, 0, 0));
         jLabel36.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel36.setText("Frequency:");
-        jPanel4.add(jLabel36);
-        jLabel36.setBounds(280, 270, 80, 19);
-
-        jLabel37.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel37.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel37.setText("Appointment ID:");
-        jPanel4.add(jLabel37);
-        jLabel37.setBounds(20, 170, 120, 19);
-
-        jLabel38.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel38.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel38.setText("101");
-        jPanel4.add(jLabel38);
-        jLabel38.setBounds(150, 170, 148, 19);
 
         jLabel39.setBackground(new java.awt.Color(0, 0, 0));
         jLabel39.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel39.setText("Doctor's Name:");
-        jPanel4.add(jLabel39);
-        jLabel39.setBounds(20, 220, 120, 19);
 
-        jLabel40.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel40.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel40.setText("Janzel Babon");
-        jPanel4.add(jLabel40);
-        jLabel40.setBounds(150, 220, 148, 19);
+        dname.setBackground(new java.awt.Color(0, 0, 0));
+        dname.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        dname.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dname.setText("dname");
+
+        javax.swing.GroupLayout pageLayout = new javax.swing.GroupLayout(page);
+        page.setLayout(pageLayout);
+        pageLayout.setHorizontalGroup(
+            pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel24))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(dname, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(pname, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(diag, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(med, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(freq, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pageLayout.setVerticalGroup(
+            pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel15))
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel25)))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel39)
+                    .addComponent(dname))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(pname))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(diag))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addComponent(med))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel34)
+                    .addComponent(dos))
+                .addGap(31, 31, 31)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel36)
+                    .addComponent(freq))
+                .addGap(1, 1, 1)
+                .addComponent(jLabel23)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
 
         jButton1.setText("PRINT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(465, 465, 465)
-                .addComponent(jButton1)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4))
@@ -540,6 +571,14 @@ public class printDandPForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_adduserPanelMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        JPanel myPanel = new JPanel();
+        PanelPrinter pPrint = new PanelPrinter(page);
+        pPrint.printPanel();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -593,6 +632,10 @@ public class printDandPForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adddpPanel;
     private javax.swing.JPanel adduserPanel;
+    public javax.swing.JLabel diag;
+    public javax.swing.JLabel dname;
+    public javax.swing.JLabel dos;
+    public javax.swing.JLabel freq;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -613,22 +656,12 @@ public class printDandPForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -637,8 +670,10 @@ public class printDandPForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel logOutPanel;
+    public javax.swing.JLabel med;
+    private javax.swing.JPanel page;
+    public javax.swing.JLabel pname;
     private javax.swing.JPanel printdapPanel;
     private javax.swing.JPanel updatefaPanel;
     private javax.swing.JPanel viewaPanel;

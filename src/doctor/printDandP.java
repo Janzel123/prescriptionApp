@@ -5,10 +5,17 @@
  */
 package doctor;
 
+import config.dbConnector;
 import frontdesk.printAppointmentForm;
+import frontdesk.printDiagPresForm;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Frank
@@ -20,8 +27,20 @@ public class printDandP extends javax.swing.JFrame {
      */
     public printDandP() {
         initComponents();
+        displayData();
     }
 
+      public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT tbl_prescription.pr_id, tbl_prescription.pr_diagnosis, tbl_prescription.pr_medicine, tbl_prescription.pr_dosage, tbl_prescription.pr_frequency, tbl_appointment.a_id, tbl_user.u_name, tbl_patient.p_name FROM tbl_prescription JOIN tbl_appointment ON tbl_appointment.a_id = tbl_prescription.a_id JOIN tbl_user ON tbl_user.u_id = tbl_prescription.u_id JOIN tbl_patient ON tbl_patient.p_id = tbl_prescription.p_id");
+            pdptable.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
+      }
     Color navcolor = new Color(0,102,102);
     Color bodycolor = new Color(0,51,51);
     
@@ -62,10 +81,10 @@ public class printDandP extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pdptable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,11 +276,6 @@ public class printDandP extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-        }
-
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -274,30 +288,43 @@ public class printDandP extends javax.swing.JFrame {
             }
         });
 
+        pdptable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        pdptable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pdptableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(pdptable);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addComponent(jLabel15)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
@@ -401,10 +428,34 @@ public class printDandP extends javax.swing.JFrame {
     }//GEN-LAST:event_adduserPanelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        printDandPForm pdpf = new printDandPForm();
-        pdpf.setVisible(true);
-        this.dispose();
+        
+        int rowIndex = pdptable.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select an appointment!");
+        }else{ 
+            TableModel model = pdptable.getModel();
+          
+            printDandPForm pdpf = new printDandPForm();
+            pdpf.dname.setText(""+model.getValueAt(rowIndex, 6));
+            pdpf.pname.setText(""+model.getValueAt(rowIndex, 7));
+            pdpf.diag.setText(""+model.getValueAt(rowIndex, 1));
+            pdpf.med.setText(""+model.getValueAt(rowIndex, 2));
+            pdpf.dos.setText(""+model.getValueAt(rowIndex, 3));
+            pdpf.freq.setText(""+model.getValueAt(rowIndex, 4));
+            
+            pdpf.setVisible(true);
+            this.dispose();
+            
+          
+                    
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pdptableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pdptableMouseClicked
+
+    }//GEN-LAST:event_pdptableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -476,8 +527,8 @@ public class printDandP extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel logOutPanel;
+    private javax.swing.JTable pdptable;
     private javax.swing.JPanel printdapPanel;
     private javax.swing.JPanel updatefaPanel;
     private javax.swing.JPanel viewaPanel;

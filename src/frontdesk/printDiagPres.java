@@ -5,10 +5,16 @@
  */
 package frontdesk;
 
+import config.dbConnector;
 import doctor.*;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -21,8 +27,22 @@ public class printDiagPres extends javax.swing.JFrame {
      */
     public printDiagPres() {
         initComponents();
+        displayData();
     }
 
+    public void displayData(){
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT tbl_prescription.pr_id, tbl_prescription.pr_diagnosis, tbl_prescription.pr_medicine, tbl_prescription.pr_dosage, tbl_prescription.pr_frequency, tbl_appointment.a_id, tbl_user.u_name, tbl_patient.p_name FROM tbl_prescription JOIN tbl_appointment ON tbl_appointment.a_id = tbl_prescription.a_id JOIN tbl_user ON tbl_user.u_id = tbl_prescription.u_id JOIN tbl_patient ON tbl_patient.p_id = tbl_prescription.p_id");
+            pdptable.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        
+        }
+      }
+    
+    
     Color navcolor = new Color(0,102,102);
     Color bodycolor = new Color(0,51,51);
     
@@ -63,7 +83,7 @@ public class printDiagPres extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pdptable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -265,7 +285,20 @@ public class printDiagPres extends javax.swing.JFrame {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Please choose diagnosis and prescription.");
 
-        jScrollPane1.setViewportView(jTable1);
+        pdptable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        pdptable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pdptableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(pdptable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -275,21 +308,19 @@ public class printDiagPres extends javax.swing.JFrame {
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(21, 21, 21))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(67, Short.MAX_VALUE)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
@@ -399,10 +430,35 @@ public class printDiagPres extends javax.swing.JFrame {
     }//GEN-LAST:event_updateaPanelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        printDiagPresForm prntd = new printDiagPresForm();
-        prntd.setVisible(true);
-        this.dispose();
+        
+        int rowIndex = pdptable.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select an appointment!");
+        }else{ 
+            TableModel model = pdptable.getModel();
+          
+            printDiagPresForm prntd = new printDiagPresForm();
+            prntd.dname.setText(""+model.getValueAt(rowIndex, 6));
+            prntd.pname.setText(""+model.getValueAt(rowIndex, 7));
+            prntd.diag.setText(""+model.getValueAt(rowIndex, 1));
+            prntd.med.setText(""+model.getValueAt(rowIndex, 2));
+            prntd.dos.setText(""+model.getValueAt(rowIndex, 3));
+            prntd.freq.setText(""+model.getValueAt(rowIndex, 4));
+            
+            prntd.setVisible(true);
+            this.dispose();
+            
+            
+          
+                    
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pdptableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pdptableMouseClicked
+
+    }//GEN-LAST:event_pdptableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -471,8 +527,8 @@ public class printDiagPres extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel logoutPanel;
+    private javax.swing.JTable pdptable;
     private javax.swing.JPanel printaPanel;
     private javax.swing.JPanel printdpPanel;
     private javax.swing.JPanel updateaPanel;

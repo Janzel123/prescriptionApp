@@ -5,9 +5,11 @@
  */
 package doctor;
 
+import config.Session;
 import prescriptionapp.*;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Frank
@@ -64,6 +66,11 @@ public class doctorDashboard extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -376,6 +383,18 @@ public class doctorDashboard extends javax.swing.JFrame {
         au.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_adduserPanelMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        
+        Session sess = Session.getInstance();
+        if(sess.getUid() == 0){
+            JOptionPane.showMessageDialog(null, "No Account, Login First!");
+            loginForm lf = new loginForm();
+            lf.setVisible(true);
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
